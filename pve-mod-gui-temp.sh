@@ -96,11 +96,12 @@ function install_mod {
             textField: 'thermalstate',\n\
             renderer: function(value){\n\
               let objValue = JSON.parse(value);\n\
+	      let package = objValue[\"coretemp-isa-0000\"][\"Package id 0\"][\"temp1_input\"];\n\
               let core0 = objValue[\"coretemp-isa-0000\"][\"Core 0\"][\"temp2_input\"];\n\
               let core1 = objValue[\"coretemp-isa-0000\"][\"Core 1\"][\"temp3_input\"];\n\
               let core2 = objValue[\"coretemp-isa-0000\"][\"Core 2\"][\"temp4_input\"];\n\
               let core3 = objValue[\"coretemp-isa-0000\"][\"Core 3\"][\"temp5_input\"];\n\
-              return \`Core 0: \$\{core0\} C | Core 1: \$\{core1\} C | Core 2: \$\{core2\} C | Core 3: \$\{core3\} C\`\n\
+              return \`Pkg: \$\{package\}°C | C0: \$\{core0\}°C | C1: \$\{core1\}°C | C2: \$\{core2\}°C | C3: \$\{core3\}°C\`\n\
             }\n\
         },\n\
         {\n\
@@ -113,7 +114,7 @@ function install_mod {
             renderer: function(value){\n\
               let objValue = JSON.parse(value);\n\
               let temp0 = objValue[\"nvme-pci-0100\"][\"Composite\"][\"temp1_input\"];\n\
-              return \`NVME: \$\{temp0\} C\`\n\
+              return \`NVME: \$\{temp0\}°C\`\n\
             }\n\
         },
     }" $pvemanagerlib
